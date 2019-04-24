@@ -14,8 +14,8 @@ function y=Rdipole(n1,L1,J1,n2,L2,J2)
 %
 
 Zcore=1;
-if isscalar(L1), L1=n1*0+L1; end; if isscalar(J1), J1=n1*0+J1; end;
-if isscalar(L2), L2=n2*0+L2; end; if isscalar(J2), J2=n2*0+J2; end;
+if isscalar(L1), L1=n1*0+L1; end; if isscalar(J1), J1=n1*0+J1; end
+if isscalar(L2), L2=n2*0+L2; end; if isscalar(J2), J2=n2*0+J2; end
 
 nstar1=n1; nstar1(J1>0)=nstar(n1(J1>0),L1(J1>0),J1(J1>0));
 nstar2=n2; nstar2(J2>0)=nstar(n2(J2>0),L2(J2>0),J2(J2>0));
@@ -27,13 +27,15 @@ temp=nstar1(I_flip);nstar1(I_flip)=nstar2(I_flip);nstar2(I_flip)=temp;
 
 omega=-(1./nstar2.^2-1./nstar1.^2)/2;
 
+% Ref. 7 Eq. (10)
 dn=nstar2-nstar1;
 ncstar=((nstar1.^(-2)+nstar2.^(-2))/2).^(-1/2);
 gamma_star=omega.*ncstar.^3;
 m=round(gamma_star-dn);
 gamma=m+dn;
-nc=(gamma./omega).^(1/3);
+nc=(gamma./omega).^(1/3); % Ref. 7 Eq. (4)
 
+% Ref. 7 Eq. (4)
 lambdac=(L1+L2)/2+1/2; eta=lambdac./nc; ec=sqrt(1-eta.^2);
 
 x=gamma.*ec;
@@ -42,6 +44,7 @@ sincs=sin(pi*gamma)./(pi*gamma);
 dL=L2-L1;
 h=m+(n2-n1)-dL;
 
+% Ref. 7 Eq. (13)
 Dp=(-angerj(gamma,-x,1)+dL.*eta./ec.*(angerj(gamma,-x,0)-sincs))./gamma;
 Dr=Dp+(1-ec).*sincs;
 
