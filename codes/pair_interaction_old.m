@@ -18,7 +18,7 @@ function [y, energies]=pair_interaction_old(N1,L1,J1,M1,geom,R)
 % Improved by Leo Zhou, Harvard University, 9/16/2016
 
 global ReducedMassFactor % =(1+me/ma)
-if isempty(ReducedMassFactor), ReducedMassFactor=1; end;
+if isempty(ReducedMassFactor), ReducedMassFactor=1; end
 
 if ~exist('N2s_distance','var')
     N2s_distance=7; % determines how far in the n-manifold to consider states for the virtual pair.
@@ -66,12 +66,12 @@ clear N2s L2s J2s M2s
 
 % JDT: make table of all possible intermediate state pairs, with energy
 % difference and products of matrix elements
-[dE{1} dE{2}]=meshgrid(dE{1},dE{2});dE=dE{1}+dE{2};
-[dp{1} dp{2}]=meshgrid(dp{1},dp{2});dp=dp{2}.*dp{1};
+[dE{1}, dE{2}]=meshgrid(dE{1},dE{2});dE=dE{1}+dE{2};
+[dp{1}, dp{2}]=meshgrid(dp{1},dp{2});dp=dp{2}.*dp{1};
 
 % JDT: also find the polarization of each transition. dM1 is change in
 % magnetic sublevel for first atom, and dM2 for second
-[dM1 dM2]=meshgrid(M2{1}-M1(1),M2{2}-M1(2));
+[dM1, dM2]=meshgrid(M2{1}-M1(1),M2{2}-M1(2));
 I1p=(dM1==1);I1z=(dM1==0);I1m=(dM1==-1);
 I2p=(dM2==1);I2z=(dM2==0);I2m=(dM2==-1);
 
