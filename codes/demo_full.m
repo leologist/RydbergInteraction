@@ -9,7 +9,7 @@ units_and_constants;
 %
 % O. Firstenberg 2012, Harvard University HQOC / MIT
 
-switch 6 % example number (1-6)
+switch 1 % example number (1-6)
     
         
 %% Example I: Energy levels
@@ -25,7 +25,7 @@ case 1
     L=3; J=5/2;        E_binding=RyM./(nstar(N,L,J).^2);    plot(N,(E_ref-E_binding)*unit_factor,'o-');
     L=3; J=7/2;        E_binding=RyM./(nstar(N,L,J).^2);    plot(N,(E_ref-E_binding)*unit_factor,'o-');
     set(gca,'yscale','log');ylabel('Transission frequency [THz]'); xlabel('n');title('Level structure');
-    legend('nS(1/2)','nP(1/2)','nP(3/2)','nD(3/2)','nD(5/2)','nF(5/2)','nF(7/2)',2);
+    legend('nS(1/2)','nP(1/2)','nP(3/2)','nD(3/2)','nD(5/2)','nF(5/2)','nF(7/2)', 2);
 
 %% Example II: Dipole lengths (radial matrix elements) from 5P3/2 state
 case 2
