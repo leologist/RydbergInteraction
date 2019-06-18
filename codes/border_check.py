@@ -31,9 +31,8 @@ for i, j in [(0, 0), (-1, -1), (1, -1), (-2, -2), (0, -2), (2, -2), (-3, -3), (-
 				else:
 					Q[x][y] += 1.0
 					Q[y][x] += 1.0
-
 x = itertools.product([-1, 1], repeat=29)
 def f(x): 
-	print(str((np.dot(x,np.dot(Q, x)), x)))
+	print(str([np.dot(x,np.dot(Q, x)), x[4], x[7], x[10], x[15]]))
 pool = multiprocessing.Pool(processes = 64)
 async_results = pool.map(f, x)
