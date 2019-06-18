@@ -1,5 +1,6 @@
 import itertools
 import numpy as np
+import multiprocessing
 
 def create_plaq(x, y):
 	return [[x, y, 'a'], [x+1, y, 'p'], [x, y+1, 'p'], [x-1, y, 'p'], [x, y-1, 'p']]
@@ -30,18 +31,9 @@ for i, j in [(0, 0), (-1, -1), (1, -1), (-2, -2), (0, -2), (2, -2), (-3, -3), (-
 				else:
 					Q[x][y] += 1.0
 					Q[y][x] += 1.0
-print(Q)
 
-tosort = np.zeros((2**29, 2))
-
-index = 0
-
-for i in itertools.product([-1, 1], repeat=29):
-	tosort[index][0] = np.dot(i,np.dot(Q, i))
-	tosort[index][1] = abs(i[4] + i[7] + i[10] + i[15])
-	index+=1
-	if index % 1000000 == 0:
-		print(index)
-		break
-
-np.save("tosort.npy", tosort)
+x = itertools.product([-1, 1], repeat=29)
+def f(x): 
+	print(str((np.dot(x,np.dot(Q, x)), x)))
+pool = multiprocessing.Pool(processes = 64)
+async_results = pool.map(f, x)
