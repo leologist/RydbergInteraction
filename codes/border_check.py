@@ -19,8 +19,6 @@ for i, j in [(0, 0), (-1, -1), (1, -1), (-2, -2), (0, -2), (2, -2), (-3, -3), (-
 					finallist.append(itm1)
 					x = index
 					index+=1
-
-					
 				if(y is None):
 					finallist.append(itm2)
 					y = index
@@ -31,8 +29,15 @@ for i, j in [(0, 0), (-1, -1), (1, -1), (-2, -2), (0, -2), (2, -2), (-3, -3), (-
 				else:
 					Q[x][y] += 1.0
 					Q[y][x] += 1.0
-x = itertools.product([-1, 1], repeat=29)
-def f(x): 
-	print(str([np.dot(x,np.dot(Q, x)), x[4], x[7], x[10], x[15]]))
-pool = multiprocessing.Pool(processes = 64)
+
+file= open("results.txt","w+")
+
+x = itertools.product([-1, 1], repeat=24)
+def f(y):
+	print("Started")
+	for i in itertools.product([-1, 1], repeat=5):
+		x = y + i
+		file.write(str([np.dot(x,np.dot(Q, x)), x[4], x[7], x[10], x[15]]))
+
+pool = multiprocessing.Pool(processes = 32)
 async_results = pool.map(f, x)
