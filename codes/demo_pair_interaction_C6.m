@@ -1,5 +1,9 @@
 global atom_name
 atom_name = 'Rb';
+
+MainWorkspaceDir = pwd;
+addpath([MainWorkspaceDir, filesep, 'atomic_data']);
+
 units_and_constants;
 geom.type='free space'; geom.angle=0;
 
@@ -18,7 +22,7 @@ Vryd2 = nan(length(R_vec),1);
 
 for ind = 1:length(R_vec)
     tic;
-    Vryd(ind,:) = pair_interaction([n1, n2], [l1, l2], [j1, j2], [m1, m2], geom, R_vec(ind)/a0, 9,1e-6);
+    Vryd(ind,:) = pair_interaction([n1, n2], [l1, l2], [j1, j2], [m1, m2], geom, R_vec(ind)/a0);
     fprintf('%0.2e um, time = %0.2f sec', R_vec(ind)/um, toc);
     fprintf('\n');
 %     tic;
